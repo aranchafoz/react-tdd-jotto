@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { findByTestAttr } from '../__test__/testUtils';
+import { findByTestAttr, checkProps } from '../__test__/testUtils';
 import Congrats from './Congrats';
 
 const defaultProps = { success: false };
@@ -36,6 +36,6 @@ test('renders non-empty congrats message when `success`', () => {
 });
 
 test('does not throw warning with expected props', () => {
-  const expectedProps = { as: true };
-  //checkProps(Congrats, expectedProps);
+  const expectedProps = { success: true };
+  checkProps(Congrats, expectedProps);
 })
