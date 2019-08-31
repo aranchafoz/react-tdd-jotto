@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.18",
     "@types/node": "12.7.2",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
     "ajv": "^6.10.2",
-    "eslint": "^6.2.2",
+    "eslint": "^5.16.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
@@ -38,12 +37,13 @@
   "devDependencies": {
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-jest": "^24.9.0",
-    "check-prop-types": "^1.1.2",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "24.0.18",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest-enzyme": "^7.1.0",
-    "react-test-renderer": "^16.9.0"
+    "ts-jest": "^24.0.2"
   }
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Congrats = (props) => {
+interface ICongratsProps {
+  success: boolean;
+}
+
+const Congrats = (props: ICongratsProps) => {
   if(props.success) {
     return (
       <div data-test="component-congrats">
