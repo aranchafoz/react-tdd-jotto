@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Component } from 'react';
 
 import { findByTestAttr, storeFactory } from '../__test__/testUtils';
 import Input from './Input';
@@ -61,6 +62,24 @@ describe('render', () => {
   });
 });
 
-describe('update state', () => {
-
+describe('redux props', () => {
+  test('has success piece of state as prop', () => {
+    const success = true;
+    const wrapper = setup({ success });
+    // FIXME: f*ing Input prop type is lost somehow and
+    // this gipsy code is needed for access success property.
+    // If you know a better way... DO IT!!
+    const wrapperInstance: Component<any, any, any> = wrapper.instance();
+    const successProp = wrapperInstance.props.success;
+    expect(successProp).toBe(success);
+  });
+  test('`guessWord` action creator is a function prop', () => {
+    const wrapper = setup();
+    // FIXME: f*ing Input prop type is lost somehow and
+    // this gipsy code is needed for access success property.
+    // If you know a better way... DO IT!!
+    const wrapperInstance: Component<any, any, any> = wrapper.instance();
+    const guessWordProp = wrapperInstance.props.guessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);
+  });
 });

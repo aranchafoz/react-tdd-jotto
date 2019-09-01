@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { guessWord } from './actions';
+
 interface IInputProps {
   store: any;
   success: boolean;
 }
 
-class Input extends Component<IInputProps, {}> {
+class Input extends Component<IInputProps, {}, {}> {
   render() {
     const { success } = this.props;
     const contents = success
@@ -35,8 +37,17 @@ class Input extends Component<IInputProps, {}> {
   }
 };
 
-const mapStateToProps = ({ success }: any) => {
+interface IReduxState {
+  success: boolean;
+  guessedWords: {
+    guessedWords: string;
+    letterMatchCount: number;
+  }[];
+  secretWord: string | null;
+}
+
+const mapStateToProps = ({ success }: IReduxState) => {
   return { success };
 };
 
-export default connect(mapStateToProps)(Input);
+export default connect(mapStateToProps, { guessWord })(Input);
