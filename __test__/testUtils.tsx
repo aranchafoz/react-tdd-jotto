@@ -11,7 +11,7 @@ import { middlewares } from '../src/configureStore';
   * @param {object} initialState - Initial state for store.
   * @returns {Store} - Redux store.
 */
-export const storeFactory = (initialState: any) => {
+export const storeFactory = (initialState?: any) => {
   const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
   return createStoreWithMiddleware(rootReducer, initialState);
 };
