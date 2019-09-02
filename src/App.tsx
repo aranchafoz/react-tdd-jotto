@@ -18,7 +18,12 @@ interface IAppProps {
   getSecretWord?: Function;
 }
 
-class App extends Component<any, {}> {
+export class UnconnectedApp extends Component<any, {}> {
+
+  componentDidMount() {
+    // get the secret word
+    this.props.getSecretWord();
+  }
 
   render() {
     const { success, guessedWords } = this.props;
@@ -46,4 +51,4 @@ const mapStateToProps = ({ success, secretWord, guessedWords }: IReduxState) => 
   return { success, secretWord, guessedWords };
 };
 
-export default connect(mapStateToProps, { getSecretWord })(App);
+export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);
