@@ -5,19 +5,45 @@ import { guessWord } from './actions';
 
 interface IInputProps {
   store?: any;
-  success: boolean;
+  success?: boolean;
   guessWord: Function;
 }
 
 export class UnconnectedInput extends Component<IInputProps, {}, {}> {
+  private inputBox: any;
+
+  /**
+   * Create ref for input box.
+   * @method constructor
+   * @param {object} props - Component props.
+   * @returns {undefined}
+   */
+  constructor(props: IInputProps) {
+    super(props);
+
+    this.inputBox = React.createRef();
+    this.submitGuessWord = this.submitGuessWord.bind(this);
+  }
+
+  submitGuessWord(e: any) {
+    // don't submit form
+    e.preventDefault();
+
+    const guessedWord = this.inputBox.current.value;
+    if(guessedWord && guessedWord.length > 0) {
+      this.props.guessWord(guessedWord);
+    }
+  }
+
   render() {
-    const { success, guessWord } = this.props;
+    const { success } = this.props;
     const contents = success
     ? null
     : (
       <form className="form-inline">
         <input
           data-test="input-box"
+          ref={this.inputBox}
           className="mb-2 mx-sm-3"
           id="word-guess"
           type="text"
@@ -26,7 +52,7 @@ export class UnconnectedInput extends Component<IInputProps, {}, {}> {
           data-test="submit-button"
           className="btn btn-primary mb-2"
           type="submit"
-          onClick={() => guessWord('train')}>
+          onClick={this.submitGuessWord}>
           Submit
         </button>
       </form>

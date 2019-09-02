@@ -84,23 +84,37 @@ describe('redux props', () => {
   });
 });
 
-test('`guessWord` runs on Input mount', () => {
-  const guessWordMock = jest.fn();
+describe('`guessWord` action creator call', () => {
+  let guessWordMock: any;
+  let wrapper: any; // FIXME: ShallowWrapper
+  const guessedWord = 'train';
 
-  const props = {
-    guessWord: guessWordMock,
-    success: false,
-  };
+  beforeEach(() => {
+    // set up mock for guessWord
+    guessWordMock = jest.fn();
+    const props = {
+      guessWord: guessWordMock,
+    };
 
-  // set up input component with guessWordMock as the guessWord prop
-  const wrapper = shallow<UnconnectedInput>(<UnconnectedInput {...props}/>);
+    // set up app component with guessWordMock as guessWord prop
+    wrapper = shallow<UnconnectedInput>(<UnconnectedInput {...props}/>);
 
-  // simulate clicked
-  const button = findByTestAttr(wrapper, 'submit-button');
-  button.simulate('click');
+    // add value to input box
+    wrapper.instance().inputBox.current = { value: guessedWord };
 
-  // check to see if mock ran
-  const guessWordCallCount = guessWordMock.mock.calls.length;
+    // simulate clicked
+    const button = findByTestAttr(wrapper, 'submit-button');
+    button.simulate('click', { preventDefault() {} });
+  });
 
-  expect(guessWordCallCount).toBe(1);
+  test('calls `guessWord` when button is clicked', () => {
+    // check to see if mock ran
+    const guessWordCallCount = guessWordMock.mock.calls.length;
+
+    expect(guessWordCallCount).toBe(1);
+  });
+  test('calls `guessWord` with input value as argument', () => {
+    const guessWordArg = guessWordMock.mock.calls[0][0];
+    expect(guessWordArg).toBe(guessedWord);
+  });
 });
