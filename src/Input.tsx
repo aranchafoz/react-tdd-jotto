@@ -6,11 +6,12 @@ import { guessWord } from './actions';
 interface IInputProps {
   store?: any;
   success: boolean;
+  guessWord: Function;
 }
 
-class Input extends Component<IInputProps, {}, {}> {
+export class UnconnectedInput extends Component<IInputProps, {}, {}> {
   render() {
-    const { success } = this.props;
+    const { success, guessWord } = this.props;
     const contents = success
     ? null
     : (
@@ -24,7 +25,8 @@ class Input extends Component<IInputProps, {}, {}> {
         <button
           data-test="submit-button"
           className="btn btn-primary mb-2"
-          type="submit">
+          type="submit"
+          onClick={() => guessWord('train')}>
           Submit
         </button>
       </form>
@@ -50,4 +52,4 @@ const mapStateToProps = ({ success }: IReduxState) => {
   return { success };
 };
 
-export default connect(mapStateToProps, { guessWord })(Input);
+export default connect(mapStateToProps, { guessWord })(UnconnectedInput);
