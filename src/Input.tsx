@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { guessWord } from './actions';
 
 interface IInputProps {
-  store: any;
+  store?: any;
   success: boolean;
 }
 

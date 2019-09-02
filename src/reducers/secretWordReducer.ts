@@ -11,7 +11,7 @@ interface IAction {
   * @param {object} action - Action sent to reducer.
   * @returns {boolean} - New state (secret word payload from action).
 */
-export default (state: any = null, action: IAction) => {
+export default (state: string | null = null, action: IAction) => {
   switch(action.type) {
     case actionTypes.SET_SECRET_WORD:
       return action.payload;
